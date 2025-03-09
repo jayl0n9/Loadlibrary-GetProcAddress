@@ -35,7 +35,7 @@ HMODULE myLoadlibrary(char* str) {
         WideCharToMultiByte(CP_UTF8, 0, FullName->Buffer, FullName->Length / 2, dllName, requiredSize, NULL, NULL);
         dllName[requiredSize] = '\0';
 
-        if (dllName == str)
+        if (strcmp(dllName, str)==0)
         {
             return (HMODULE)(*((ULONG64*)((BYTE*)pNode + 0x10)));
             break;
@@ -55,7 +55,8 @@ void* myGetProcAddress(void* baseAddress, char* str) {
     int countzwfunc = 0;
     for (DWORD i = 0; i < exportDirectory->NumberOfNames; i++) {
         char* functionName = (char*)((BYTE*)baseAddress + nameAddresses[i]);
-        if (functionName == str) {
+        
+        if (strcmp(functionName, str) == 0) {
             DWORD ordinal = nameOrdinals[i];
             retFunctionAddress = (void*)((BYTE*)baseAddress + functionAddresses[ordinal]);
         }
