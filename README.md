@@ -1,0 +1,1 @@
+通过自实现Loadlibrary&GetProcAddress，在免杀时就可以没有乱七八糟的导入表
